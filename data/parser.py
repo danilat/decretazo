@@ -261,6 +261,7 @@ html = """
 """
 import os
 from bs4 import BeautifulSoup
+import json
 
 def generate_json(content, boe_ref):
 	soup = BeautifulSoup(content)
@@ -299,7 +300,7 @@ def generate_json(content, boe_ref):
 		'pdf': 'http://www.boe.es' + pdf
 	}
 	
-	return obj
+	return json.dumps(obj)
 
 for dirname, dirnames, filenames in os.walk('data/decreto-ley'):
     for filename in filenames:
@@ -309,5 +310,8 @@ for dirname, dirnames, filenames in os.walk('data/decreto-ley'):
 	        content = f.read()
 	        boe_ref = filename.replace('.html','')
 	        print filename
-	        generate_json(content, boe_ref)
+	        generated = generate_json(content, boe_ref)
+	        jsonFile = open("data/json/" + boe_ref + ".json", 'w')
+	        jsonFile.write(generated)
+	        jsonFile.close()
         
