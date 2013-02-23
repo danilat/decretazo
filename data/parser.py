@@ -270,7 +270,7 @@ def generate_json(content, boe_ref):
 	analisysDiv = div.find('div', {'class': 'analisisDoc'})
 
 	analisys = []
-	subjects = []
+	more = {}
 	pdfDiv = div.find('li', {'class': 'puntoPDF'})
 	if not pdfDiv:
 		pdfDiv = div.find('li', {'class': 'puntoPDFsup'})
@@ -280,26 +280,34 @@ def generate_json(content, boe_ref):
 		uls = analisysDiv.find_all('ul')
 		for an in uls[0].find_all('li'):
 			analisys.append(an.text)
-		for subject in uls[1].find_all('li'):
-			subjects.append(subject.text)
+		h5 = analisysDiv.find_all('h5')
+		if len(h5) > 1:
+			index = 0
+			while len(h5) > index:
+				elements = []
+				for elem in uls[index+1].find_all('li'):
+					elements.append(elem.text)
+				more[h5[index].text] = elements
+				index += 1
 
 	obj = {
 		'title': title,
 		'content': content,
 		'analisys': analisys,
-		'subjects': subjects,
+		'more': more,
 		'url': 'http://www.boe.es/diario_boe/txt.php?id=' + boe_ref,
 		'pdf': 'http://www.boe.es' + pdf
 	}
-	print obj['url']
+	
 	return obj
 
-#generate_json(html)
 for dirname, dirnames, filenames in os.walk('data/decreto-ley'):
     for filename in filenames:
-    	filedir = os.path.join(dirname, filename)
-        f = open(filedir, 'r')
-        content = f.read()
-        boe_ref = filename.replace('.html','')
-        generate_json(content, boe_ref)
+    	if filename.startswith('BOE'):
+    		filedir = os.path.join(dirname, filename)
+	        f = open(filedir, 'r')
+	        content = f.read()
+	        boe_ref = filename.replace('.html','')
+	        print filename
+	        generate_json(content, boe_ref)
         
