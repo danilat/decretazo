@@ -5,8 +5,33 @@
 <meta charset="utf-8" />
 <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<style>
+
+.chart {
+  font: 10px sans-serif;
+}
+
+ .chart div {
+   font: 10px sans-serif;
+   background-color: steelblue;
+   text-align: right;
+   padding: 3px;
+   margin: 1px;
+   color: white;
+ }
+
+ .chart rect {
+   stroke: white;
+   fill: steelblue;
+ }
+
+</style>
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="./bootstrap/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -57,10 +82,89 @@
 </div>
 
 <div class="row" id="grafica">
-Aquí viene la gráfica
+<svg/>
 </div>
 
 </div>
 
 <body>
+
+<script src="./bootstrap/js/d3.v3.min.js"></script>
+<script>
+
+
+d3.csv("./bootstrap/js/decrets.csv", function(error, data) {
+
+  data=data.reverse();
+
+  data.forEach(function(d){
+    d.year= +d.year;
+    d.decrets= +d.decrets;
+  });
+
+ var chartHeight=420;
+ var chartWidth=20 * data.length;
+
+ var chart = d3.select("svg")
+     .attr("class", "chart")
+     .attr("height", chartHeight+20)
+     .attr("width", chartWidth+20)
+     .append("g")
+     .attr("transform", "translate(20,20)");
+
+  var maxDecrets=d3.max(data,function(d){return d.decrets;});
+
+ var y = d3.scale.linear()
+     .domain([0, maxDecrets])
+     .range([0, chartHeight]);
+
+
+
+ chart.selectAll("line")
+     .data(y.ticks(10))
+   .enter().append("line")
+     .attr("y1", y)
+     .attr("y2", y)
+     .attr("x1", -20)
+     .attr("x2", chartHeight)
+     .style("stroke", "#ccc");
+
+ chart.selectAll("rect")
+     .data(data)
+   .enter().append("rect")
+      .attr("y",function(d){return chartHeight-y(d.decrets); })
+     .attr("x", function(d, i) { return i * 20; })
+     .attr("height",function(d){return y(d.decrets); })
+     .attr("width", 20);
+
+chart.selectAll("text")
+     .data(data)
+   .enter().append("text")
+     .attr("y",function(d){return chartHeight-y(d.decrets); })
+     .attr("dy","10px")
+     .attr("x", function(d, i) { return i * 20; })
+     .attr("dx","2px")
+     .text(function(d){ return d.decrets});
+
+ chart.selectAll(".rule")
+     .data(y.ticks(10))
+   .enter().append("text")
+     .attr("class", "rule")
+     .attr("y", y)
+     .attr("x", -20)
+     .attr("dy", -3)
+     .attr("dx", 10)
+     .attr("text-anchor", "middle")
+     .text(function(d){return maxDecrets-d;});
+
+ chart.append("line")
+      .attr("y1", chartHeight-1)
+      .attr("y2", chartHeight)
+     .attr("x1", 0)
+     .attr("x2", chartWidth)
+     .style("stroke", "#000");
+
+});
+
+</script>
 </html>
