@@ -272,8 +272,8 @@ def is_decree_law(html_doc):
 	else:
 	  exito = False
 	return exito
-print is_decree_law(html)
-"""for dirname, dirnames, filenames in os.walk('data/html'):
+
+for dirname, dirnames, filenames in os.walk('data/html'):
     for filename in filenames:
     	if filename.startswith('BOE'):
 	    	filedir = os.path.join(dirname, filename)
@@ -282,4 +282,4 @@ print is_decree_law(html)
 	        print filedir
 	        if is_decree_law(content):
 	        	shutil.copyfile(filedir, 'data/decreto-ley/'+filename)
-        """
+        
