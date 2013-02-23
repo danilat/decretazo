@@ -277,10 +277,14 @@ def generate_json(content, boe_ref):
 		pdfDiv = div.find('li', {'class': 'puntoPDFsup'})
 
 	pdf = pdfDiv.find('a')['href']
+	date = ""
 	if analisysDiv:
 		uls = analisysDiv.find_all('ul')
 		for an in uls[0].find_all('li'):
 			analisys.append(an.text)
+			if an.text.startswith(u'Fecha de publicac'):
+				splitWord = unicode(an.text).split(u': ',1)
+				date = splitWord[1]
 		h5 = analisysDiv.find_all('h5')
 		if len(h5) > 1:
 			index = 0
@@ -296,6 +300,7 @@ def generate_json(content, boe_ref):
 		'content': content,
 		'analisys': analisys,
 		'more': more,
+		'date': date,
 		'url': 'http://www.boe.es/diario_boe/txt.php?id=' + boe_ref,
 		'pdf': 'http://www.boe.es' + pdf
 	}
