@@ -267,7 +267,7 @@ import re
 from bs4 import BeautifulSoup
 
 def is_decree_law(html_doc):
-	if re.search('<h3 class="documento-tit">Real Decreto-ley', html_doc):
+	if re.search('<h3 class="documento-tit">Real Decreto-ley'.lower(), html_doc.lower()):
 	  exito =  True
 	else:
 	  exito = False
