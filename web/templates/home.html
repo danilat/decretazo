@@ -72,10 +72,12 @@
 <h3>Últimos Decretos Ley</h3>
 <table class="table">
 <thead>
-<tr><th>Fecha</th><th>T</div>ítulo</th><th>URL BOE</th><th>Materias</th></tr>
+<tr><th>Fecha</th><th>Título</th><th>URL BOE</th><th>Materias</th></tr>
 </thead>
 <tbody>
-<tr><td>23/02/2013</td><td>Justicia. Tasas.</td><td><a href="http://boe.es/boe/dias/2013/02/23/pdfs/BOE-A-2013-2029.pdf">PDF</a></td><td>Justicia</td></tr>
+  {% for decree in decrees %}
+    <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a href="{{ decree['url'] }}">URL</a></td><td></td></tr>
+  {% endfor %}
 </tbody>
 <tfoot><tr><td colspan="4"><a href="">Ver todos</a></td></tr></tfoot>
 </table>
@@ -87,7 +89,6 @@
 
 </div>
 
-<body>
 
 <script src="./bootstrap/js/d3.v3.min.js"></script>
 <script>
@@ -167,4 +168,6 @@ chart.selectAll("text")
 });
 
 </script>
+</body>
 </html>
+
