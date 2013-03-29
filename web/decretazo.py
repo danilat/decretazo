@@ -12,7 +12,6 @@ def index():
     files = os.listdir(JSON_DIR)
     files.sort()
     files.reverse()
-    files = files[:5]
     decrees = []
     for f in files:
         j = json.load(open(JSON_DIR + f))
