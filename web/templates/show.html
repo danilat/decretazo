@@ -1,0 +1,11 @@
+<h2>Decretazos en el año {{ year }}</h2>
+<table class="table">
+  <thead>
+  <tr><th>Fecha</th><th>Título</th><th>URL BOE</th></tr>
+  </thead>
+  <tbody>
+    {% for decree in decrees %}
+      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">URL</a></td></tr>
+    {% endfor %}
+  </tbody>
+  </table>
