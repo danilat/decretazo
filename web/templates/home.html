@@ -26,6 +26,8 @@
    fill: steelblue;
  }
 
+ .chart line{stroke:#ccc;}
+
  #grafica{
   text-align: center;
  }
@@ -59,25 +61,24 @@
     </div>
   </header>
 
+  <h3>Últimos 10 años de decretazos</h3>
   <div class="row" id="grafica">
   <svg/>
   </div>
-
-    <div class="row" id="ultimos">
+<br/>
+    <div class="row well" id="ultimos">
   <h3>Últimos Decretos Ley</h3>
   <table class="table">
   <thead>
-  <tr><th>Fecha</th><th>Título</th><th>URL BOE</th><th>Materias</th></tr>
+  <tr><th>Fecha</th><th>Título</th><th>URL BOE</th></tr>
   </thead>
   <tbody>
     {% for decree in decrees[:5] %}
-      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a href="{{ decree['url'] }}">URL</a></td><td></td></tr>
+      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">URL</a></td></tr>
     {% endfor %}
   </tbody>
-  <tfoot><tr><td colspan="4"><a href="">Ver todos</a></td></tr></tfoot>
   </table>
   </div>
-
   <div class="row" id="que_es">
   <h3>¿Qué es un decreto ley?</h3>
   <p>
@@ -89,7 +90,7 @@
    </ol>
   </p>
   </div>
-  <div class="row" id="about">
+  <div class="row well" id="about">
     <h3>Acerca de decretazo.com</h3>
     <p>Es un proyecto que arrancó dentro del hackathon <a href="http://opendataday.org/">Open Data Day 2013</a>. Somos un pequeño conjunto de programadores y diseñadores participantes en el proyecto somos Miguel Ángel, Fernando, Borja, Dani, Rafa, David y Ana.</p>
     <p>El código está disponible para libre consulta, descarga y modificación bajo licencia ¿? </p>
@@ -140,8 +141,7 @@ d3.csv("./bootstrap/js/decrets.csv", function(error, data) {
      .attr("y1", y)
      .attr("y2", y)
      .attr("x1", -20)
-     .attr("x2", chartWidth)
-     .style("stroke", "#ccc");
+     .attr("x2", chartWidth);
 
  chart.selectAll("rect")
      .data(data)
@@ -170,13 +170,6 @@ chart.selectAll("text")
      .attr("dx", 10)
      .attr("text-anchor", "middle")
      .text(function(d){return maxDecrets-d;});
-
- chart.append("line")
-      .attr("y1", chartHeight-1)
-      .attr("y2", chartHeight)
-     .attr("x1", 0)
-     .attr("x2", chartWidth)
-     .style("stroke", "#000");
 
 });
 
