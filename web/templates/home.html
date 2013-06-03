@@ -26,6 +26,10 @@
    fill: steelblue;
  }
 
+ #grafica{
+  text-align: center;
+ }
+
 </style>
 
 </head>
@@ -55,6 +59,10 @@
     </div>
   </header>
 
+  <div class="row" id="grafica">
+  <svg/>
+  </div>
+
     <div class="row" id="ultimos">
   <h3>Últimos Decretos Ley</h3>
   <table class="table">
@@ -68,12 +76,6 @@
   </tbody>
   <tfoot><tr><td colspan="4"><a href="">Ver todos</a></td></tr></tfoot>
   </table>
-  </div>
-
-
-
-  <div class="row" id="grafica">
-  <svg/>
   </div>
 
   <div class="row" id="que_es">
@@ -113,13 +115,14 @@ d3.csv("./bootstrap/js/decrets.csv", function(error, data) {
     d.decrets= +d.decrets;
   });
 
- var chartHeight=420;
- var chartWidth=20 * data.length;
+ var chartHeight=450;
+ var barWidth = 60;
+ var chartWidth = barWidth * data.length;
 
  var chart = d3.select("svg")
      .attr("class", "chart")
      .attr("height", chartHeight+20)
-     .attr("width", chartWidth+20)
+     .attr("width", chartWidth+barWidth)
      .append("g")
      .attr("transform", "translate(20,20)");
 
@@ -137,23 +140,23 @@ d3.csv("./bootstrap/js/decrets.csv", function(error, data) {
      .attr("y1", y)
      .attr("y2", y)
      .attr("x1", -20)
-     .attr("x2", chartHeight)
+     .attr("x2", chartWidth)
      .style("stroke", "#ccc");
 
  chart.selectAll("rect")
      .data(data)
    .enter().append("rect")
       .attr("y",function(d){return chartHeight-y(d.decrets); })
-     .attr("x", function(d, i) { return i * 20; })
+     .attr("x", function(d, i) { return i * barWidth; })
      .attr("height",function(d){return y(d.decrets); })
-     .attr("width", 20);
+     .attr("width", barWidth);
 
 chart.selectAll("text")
      .data(data)
    .enter().append("text")
      .attr("y",function(d){return chartHeight-y(d.decrets); })
      .attr("dy","10px")
-     .attr("x", function(d, i) { return i * 20; })
+     .attr("x", function(d, i) { return i * barWidth; })
      .attr("dx","2px")
      .text(function(d){ return d.decrets});
 
