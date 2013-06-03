@@ -1,3 +1,5 @@
+{% extends "layout.html" %}
+{% block body %}
 <h2>Decretazos en el año {{ year }}</h2>
 <table class="table">
   <thead>
@@ -9,3 +11,4 @@
     {% endfor %}
   </tbody>
   </table>
+{% endblock %}

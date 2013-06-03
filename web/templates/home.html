@@ -1,66 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Decretazo.com</title>
-<meta charset="utf-8" />
-<link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-<style>
-
-.chart {
-  font: 10px sans-serif;
-}
-
- .chart div {
-   font: 10px sans-serif;
-   background-color: steelblue;
-   text-align: right;
-   padding: 3px;
-   margin: 1px;
-   color: white;
- }
-
- .chart rect {
-   stroke: white;
-   fill: steelblue;
- }
-
- .chart line{stroke:#ccc;}
-
- #grafica{
-  text-align: center;
- }
-
-</style>
-
-</head>
-<body>
-<!--div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#">Decretazo</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#que_es">¿Decreto ley?</a></li>
-              <li><a href="#about">Acerca de</a></li>
-              <li><a href="#contact">Contacto</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-</div-->
-
-<div class="container">
-  <header>
-    <div class="row">
-      <div class="span6 well">
-        <h1><img src="./img/decretazo-04.png"></h1>
-      </div>
-    </div>
-  </header>
-
+{% extends "layout.html" %}
+{% block body %}
   <h2>Últimos 10 años de decretazos</h2>
   <div class="row" id="grafica">
   <svg/>
@@ -90,15 +29,7 @@
    </ol>
   </p>
   </div>
-  <div class="row well" id="about">
-    <h3>Acerca de decretazo.com</h3>
-    <p>Es un proyecto que arrancó dentro del hackathon <a href="http://opendataday.org/">Open Data Day 2013</a>. Somos un pequeño conjunto de programadores y diseñadores participantes en el proyecto somos Miguel Ángel, Fernando, Borja, Dani, Rafa, David y Ana.</p>
-    <p>El código está disponible para libre consulta, descarga y modificación bajo licencia ¿? </p>
-
-    <p>Tenemos que agradecer a la <strong><a href="http://www.civio.es/">Fundación Civio</a></strong> el habernos dejarnos accesibles los htmls de los BOEs ya descargados, y de ese modo ayudarnos a adelantar trabajo.</p>
-  </div>
-
-</div>
+  
 
 
 <script src="http://code.jquery.com/jquery.js"></script>
@@ -174,6 +105,4 @@ chart.selectAll("text")
 });
 
 </script>
-</body>
-</html>
-
+{% endblock %}

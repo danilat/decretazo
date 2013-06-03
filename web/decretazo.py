@@ -14,6 +14,11 @@ def read_files():
     files.reverse()
     return files
 
+def get_year(filename):
+    match = re.findall('BOE-A-\w+', filename)[0]
+    year = match.split('BOE-A-')[1]
+    return year
+
 @app.route('/')
 def index():
     decrees = []
@@ -27,9 +32,7 @@ def index():
 def show(year):
     decrees = []
     for f in read_files():
-        match = re.findall('BOE-A-\w+', f)[0]
-        file_year = match.split('BOE-A-')[1]
-        if year == file_year:
+        if year == get_year(f):
             j = json.load(open(JSON_DIR + f))
             decrees.append(j)
     return render_template('show.html', decrees=decrees, year=year)
