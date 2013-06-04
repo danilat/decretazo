@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+{% block title %}
+{{ decrees|length }} decretazos desde el año {{ years[0] }}
+{% endblock %}
 {% block body %}
   <h2>{{ decrees|length }} decretazos desde el año {{ years[0] }}</h2>
   <div class="row" id="grafica">
