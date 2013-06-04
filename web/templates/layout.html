@@ -34,21 +34,20 @@
 </style>
 </head>
 <body>
-  <!--div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Decretazo</a>
+          <a class="brand" href="/">Decretazo</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#que_es">¿Decreto ley?</a></li>
-              <li><a href="#about">Acerca de</a></li>
-              <li><a href="#contact">Contacto</a></li>
+              {% for year in years %}
+              <li><a href="{{ year }}">{{ year }}</a></li>
+              {% endfor %}
             </ul>
           </div>
         </div>
       </div>
-</div-->
+</div>
   <div class="container">
   <header>
     <div class="row">
@@ -60,8 +59,8 @@
 {% block body %}{% endblock %}
   <div class="row well" id="about">
     <h3>Acerca de decretazo.com</h3>
-    <p>Es un proyecto que arrancó dentro del hackathon <a href="http://opendataday.org/">Open Data Day 2013</a>. Somos un pequeño conjunto de programadores y diseñadores participantes en el proyecto somos Miguel Ángel, Fernando, Borja, Dani, Rafa, David y Ana.</p>
-    <p>El código está disponible para libre consulta, descarga y modificación bajo licencia ¿? </p>
+    <p>Es un proyecto que arrancó dentro del hackathon <strong><a href="http://opendataday.org/">Open Data Day 2013</a></strong>. Somos un pequeño conjunto de programadores y diseñadores participantes en el proyecto somos Miguel Ángel, Fernando, Borja, Rafa, David, Ana y Dani.</p>
+    <p><a href="https://github.com/danilat/decretazo" blank="target">El código fuente</a> está disponible para libre consulta, descarga y modificación bajo <strong>licencia MIT</strong>.</p>
 
     <p>Tenemos que agradecer a la <strong><a href="http://www.civio.es/">Fundación Civio</a></strong> el habernos dejarnos accesibles los htmls de los BOEs ya descargados, y de ese modo ayudarnos a adelantar trabajo.</p>
   </div>

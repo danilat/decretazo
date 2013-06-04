@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block body %}
-<h2>Decretazos en el año {{ year }}</h2>
+<h2>{{ decrees|length }} decretazos en el año {{ year }}</h2>
 <table class="table">
   <thead>
-  <tr><th>Fecha</th><th>Título</th><th>URL BOE</th></tr>
+  <tr><th>Fecha</th><th>Título</th><th>Referencia en el BOE</th></tr>
   </thead>
   <tbody>
     {% for decree in decrees %}
-      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">URL</a></td></tr>
+      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">Iral BOE</a></td></tr>
     {% endfor %}
   </tbody>
   </table>

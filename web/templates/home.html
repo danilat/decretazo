@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h2>Últimos 10 años de decretazos</h2>
+  <h2>{{ decrees|length }} decretazos desde el año {{ years[0] }}</h2>
   <div class="row" id="grafica">
   <svg/>
   </div>

@@ -11,31 +11,37 @@ app = Flask(__name__, static_url_path='')
 def read_files():
     files = os.listdir(JSON_DIR)
     files.sort()
-    files.reverse()
     return files
 
 def get_year(filename):
     match = re.findall('BOE-A-\w+', filename)[0]
     year = match.split('BOE-A-')[1]
+    if not years.count(year) > 0:
+        years.append(year)
     return year
+
+years = []
+files = read_files()
 
 @app.route('/')
 def index():
     decrees = []
-    years = {}
-    for f in read_files():
+    for f in files:
         j = json.load(open(JSON_DIR + f))
+        year = get_year(f)
         decrees.append(j)
-    return render_template('home.html', decrees=decrees)
+    return render_template('home.html', decrees=decrees, years=years)
 
-@app.route('/<year>')
-def show(year):
+@app.route('/<selected_year>')
+def show(selected_year):
     decrees = []
-    for f in read_files():
-        if year == get_year(f):
+    for f in files:
+        year = get_year(f)
+        if selected_year == year:
             j = json.load(open(JSON_DIR + f))
             decrees.append(j)
-    return render_template('show.html', decrees=decrees, year=year)
+    print years
+    return render_template('show.html', decrees=decrees, year=selected_year, years=years)
 
 if __name__ == '__main__':
     app.run(debug=True)
