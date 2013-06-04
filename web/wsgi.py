@@ -26,11 +26,13 @@ files = read_files()
 @app.route('/')
 def index():
     decrees = []
+    fils = files
     for f in files:
         j = json.load(open(JSON_DIR + f))
         year = get_year(f)
         decrees.append(j)
-    return render_template('home.html', decrees=decrees, years=years)
+    decrees.reverse()
+    return render_template('home.html', decrees=decrees, last_decrees=decrees[:10], years=years)
 
 @app.route('/<selected_year>')
 def show(selected_year):
@@ -40,7 +42,6 @@ def show(selected_year):
         if selected_year == year:
             j = json.load(open(JSON_DIR + f))
             decrees.append(j)
-    print years
     return render_template('show.html', decrees=decrees, year=selected_year, years=years)
 
 if __name__ == '__main__':

@@ -7,21 +7,8 @@
   <div class="row" id="grafica">
   <svg/>
   </div>
-<br/>
-    <div class="row well" id="ultimos">
-  <h3>Últimos Decretos Ley</h3>
-  <table class="table">
-  <thead>
-  <tr><th>Fecha</th><th>Título</th><th>Referencia en el BOE</th></tr>
-  </thead>
-  <tbody>
-    {% for decree in decrees[:5] %}
-      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">Ir al BOE</a></td></tr>
-    {% endfor %}
-  </tbody>
-  </table>
-  </div>
-  <div class="row" id="que_es">
+
+<div class="row well" id="que_es">
   <h3>¿Qué es un decreto ley?</h3>
   <p>
    <strong>La Constitución de 1978 define los Decretos Ley en su artículo 86</strong>:
@@ -32,6 +19,20 @@
    </ol>
   </p>
   </div>
+    <div class="row" id="ultimos">
+  <h3>Últimos Decretos Ley</h3>
+  <table class="table">
+  <thead>
+  <tr><th>Fecha</th><th>Título</th><th>Referencia en el BOE</th></tr>
+  </thead>
+  <tbody>
+    {% for decree in last_decrees %}
+      <tr><td>{{ decree['date'] }}</td><td>{{ decree['title'] }}</td><td><a target="blank" href="{{ decree['url'] }}">Ir al BOE</a></td></tr>
+    {% endfor %}
+  </tbody>
+  </table>
+  </div>
+  
   
 
 
