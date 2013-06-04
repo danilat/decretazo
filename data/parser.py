@@ -316,7 +316,7 @@ for dirname, dirnames, filenames in os.walk('data/decreto-ley'):
 	        boe_ref = filename.replace('.html','')
 	        print filename
 	        generated = generate_json(content, boe_ref)
-	        jsonFile = open("data/json/" + boe_ref + ".json", 'w')
+	        jsonFile = open("web/data/" + boe_ref + ".json", 'w')
 	        jsonFile.write(generated)
 	        jsonFile.close()
         
