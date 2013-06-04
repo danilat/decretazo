@@ -76,22 +76,26 @@ d3.csv("./bootstrap/js/decrets.csv", function(error, data) {
      .attr("y2", y)
      .attr("x1", -20)
      .attr("x2", chartWidth);
-
+//
  chart.selectAll("rect")
-     .data(data)
-   .enter().append("rect")
+      .data(data)
+      .enter()
+      .append("a")
+      .attr("xlink:href", function(d){return d.year;})
+      .on("mouseover", function(d){return "";})
+      .append("rect")
       .attr("y",function(d){return chartHeight-y(d.decrets); })
-     .attr("x", function(d, i) { return i * barWidth; })
-     .attr("height",function(d){return y(d.decrets); })
-     .attr("width", barWidth);
+      .attr("x", function(d, i) { return i * barWidth; })
+      .attr("height",function(d){return y(d.decrets); })
+      .attr("width", barWidth);
 
 chart.selectAll("text")
      .data(data)
    .enter().append("text")
      .attr("y",function(d){return chartHeight-y(d.decrets); })
-     .attr("dy","10px")
+     .attr("dy","20px")
      .attr("x", function(d, i) { return i * barWidth; })
-     .attr("dx","2px")
+     .attr("dx","20px")
      .text(function(d){ return d.decrets});
 
  chart.selectAll(".rule")
