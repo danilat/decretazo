@@ -4,7 +4,7 @@ import re
 from flask import Flask
 from flask import render_template, url_for
 
-JSON_DIR = '../data/json/'
+JSON_DIR = 'data/'
 
 app = Flask(__name__, static_url_path='')
 
